@@ -93,23 +93,25 @@ export default function examplesPage() {
             Here are some examples of images generated using the PixelVerse.
           </p>
         </header>
-        <section className="grid w-[90vw] gap-10 md:grid-cols-3">
+        <section className="columns-1 md:columns-3">
           {promptCards.map((promptImage, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle>Prompt :</CardTitle>
-                <CardDescription>{promptImage.prompt}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Image
-                  src={promptImage.image}
-                  alt={promptImage.alt}
-                  placeholder="blur"
-                  width={512}
-                  height={512}
-                />
-              </CardContent>
-            </Card>
+            <div key={index} className="break-inside-avoid pb-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Prompt :</CardTitle>
+                  <CardDescription>{promptImage.prompt}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Image
+                    src={promptImage.image}
+                    alt={promptImage.alt}
+                    placeholder="blur"
+                    width={1024}
+                    height={1024}
+                  />
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </section>
       </section>
