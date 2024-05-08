@@ -77,8 +77,8 @@ const promptCards = [
 
 export default function examplesPage() {
   return (
-    <main className="flex min-h-screen flex-col p-10 md:p-12">
-      <section className="flex w-full flex-col items-center justify-between gap-16 p-16 md:items-start md:p-12">
+    <main className="flex min-h-screen flex-col md:p-12">
+      <section className="flex w-full flex-col items-center justify-between gap-16 pt-24 p-8 md:items-start md:p-12">
         <div className="absolute left-5 right-5 top-5 flex items-center justify-between gap-x-6 md:left-auto md:justify-normal">
           <Button variant="outline">
             <Link href="/">Home</Link>
