@@ -28,7 +28,7 @@ export default function PixelVerse() {
         <p>
           Built by{" "}
           <Link
-            href="https://lakshb.me"
+            href="https://lakshb.dev"
             target="_blank"
             rel="noopenner noreferrer"
             className="font-medium underline underline-offset-4 transition duration-150 ease-linear md:hover:text-primary">

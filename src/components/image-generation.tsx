@@ -6,12 +6,13 @@ import { useToast } from "@/components/ui/use-toast";
 import Modal from "./modal";
 
 const ImageGenerator: React.FC = () => {
-  const API_TOKEN = process.env.NEXT_PUBLIC_HUGGINGFACE_API_TOKEN;
   const [loading, setLoading] = useState<boolean>(false);
   const [output, setOutput] = useState<string | null>(null);
   const [inputText, setInputText] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const { toast } = useToast();
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,18 +25,15 @@ const ImageGenerator: React.FC = () => {
       return;
     }
     setLoading(true);
+    setIsModalOpen(false); // Hide the modal when a new image is generating
     try {
-      const response = await fetch(
-        "https://api-inference.huggingface.co/models/stabilityai/stable-diffusion-xl-base-1.0",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${API_TOKEN}`,
-          },
-          body: JSON.stringify({ inputs: inputText }),
+      const response = await fetch(`${API_URL}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ prompt: inputText }),
+      });
 
       if (!response.ok) {
         throw new Error("Failed to generate image");
@@ -82,7 +80,7 @@ const ImageGenerator: React.FC = () => {
         <Button type="submit" disabled={loading}>
           {loading ? "Generating your artwork..." : "Generate"}
         </Button>
-        {output && (
+        {!loading && output && (
           <Modal isOpen={isModalOpen} imageSrc={output} title={inputText} />
         )}
       </form>
